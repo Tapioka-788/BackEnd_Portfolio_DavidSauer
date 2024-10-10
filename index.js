@@ -7,47 +7,76 @@ const porta = 3000;
 app.use(cors());
 app.use(express.json());
 
-const vetor = [
-    { mensagem: 'Projetos 1',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/0d9dd8bc-5ca7-4dce-b1eb-43ac57b2aae0/AlbedoBase_XL_create_images_about_something_cyberpunk_with_pur_2.jpg&#39' },
-    { mensagem: 'Projetos 2',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/0d9dd8bc-5ca7-4dce-b1eb-43ac57b2aae0/AlbedoBase_XL_create_images_about_something_cyberpunk_with_pur_1.jpg&#39' },
-    { mensagem: 'Projetos 3',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/f7d929ba-1f59-4057-8f6f-56ff5441337d/AlbedoBase_XL_create_images_about_cyber_with_purple_and_ora_0.jpg&#39' },
-    { mensagem: 'Projetos 4',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/f7d929ba-1f59-4057-8f6f-56ff5441337d/AlbedoBase_XL_create_images_about_cyber_with_purple_and_ora_3.jpg&#39' },
-    { mensagem: 'Projetos 5',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/55b10401-dab3-426c-ac38-0bd8421c5b32/AlbedoBase_XL_create_images_about_something_tech_and_cyberpun_1.jpg&#39' },
-    { mensagem: 'Projetos 6',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/55b10401-dab3-426c-ac38-0bd8421c5b32/AlbedoBase_XL_create_images_about_something_tech_and_cyberpun_3.jpg&#39' },
-    { mensagem: 'Projetos 7',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/0d9dd8bc-5ca7-4dce-b1eb-43ac57b2aae0/AlbedoBase_XL_create_images_about_something_cyberpunk_with_pur_3.jpg&#39'},
-    { mensagem: 'Projetos 8',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/f7d929ba-1f59-4057-8f6f-56ff5441337d/AlbedoBase_XL_create_images_about_cyber_with_purple_and_ora_2.jpg&#39' },
-    { mensagem: 'Projetos 9',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/f7d929ba-1f59-4057-8f6f-56ff5441337d/AlbedoBase_XL_create_images_about_cyber_with_purple_and_ora_1.jpg&#39' },
-    { mensagem: 'Projetos 10',  numero: 'https://cdn.leonardo.ai/users/bfc04243-3633-4215-abd8-25cc426aef65/generations/d89cf335-b304-49e0-b305-edbced050a66/AlbedoBase_XL_create_images_about_something_tech_and_cyberpun_2.jpg&#39' }
+
+
+//const vetor = [
+  //  {mensagem: 'oi', numero: 0 },
+    //{mensagem: 'ola', numero: 1 },
+    //{mensagem: 'hi', numero: 2 },
+    //{mensagem: 'hello', numero: 3 },
+//]
+
+let cartoes = [
+    {
+        nome: 'cartao 1',
+        valor: '10pila',
+        imagem: 'https://www.sigmaaldrich.com/content/dam/sigma-aldrich/product0/071/a5752-25mg_0057134_btl.tif/_jcr_content/renditions/a5752-25mg_0057134_btl-large'
+    },
+    {
+        nome: 'cartao 2',
+        valor: '48,89cents',
+        imagem: 'https://images-americanas.b2w.io/produtos/01/00/img/3769059/8/3769059896_1GG.jpg'
+    },
+    {
+        nome: 'cartao 3',
+        valor: 'fiftcent',
+        imagem: 'https://cdn.awsli.com.br/600x450/1810/1810043/produto/88385637/c76fbaa43e.jpg'
+    },
+    {
+        nome: 'cartao 4',
+        valor: '2dól',
+        imagem: 'https://cdn.sistemawbuy.com.br/arquivos/3d031251600db30f801738111450cdd4/produtos/65553c13c7c0c/20240205_170005-1-65c37c57574dc.jpg'
+    },
 ];
 
-app.get('/fds', (req, res) => {
-    res.status(200).json({vetor});
-    console.log('ta potente')
+app.get('/cartoes', (req, res) => {
+    res.status(200).json({ cartoes });
+    console.log('oi');
+
+})
+
+app.post('/cartoes', (req, res) => {
+    const{nome , valor , imagem} = req.body;
+
+    cartoes.push({nome: nome, valor: valor, imagem: imagem});
+    console.log(cartoes);
+    res.status(201).json({ mensagem: 'funfo' });
 });
 
-app.post('/fds', (req, res) => {
-    const mensagem =req.body.mensagem;
-    vetor.push({mensagem: mensagem, numero: vetor.length});
-    console.log(vetor);
-    res.status(201).json({mensagem: 'é POST'});
-   
-});
+app.get('/cartoes', (req, res) => {
+    res.status(200).json({ cartoes });
+    console.log('oi');
 
-app.delete('/fds', (req, res) => {
-    const numero =req.body.numero;
-    vetor.splice(numero, 1);
-    console.log(vetor);
-    res.status(201).json({mensagem: 'é DELETE'});
-   
-});
+})
 
-app.put('/fds', (req, res) => {
-    const numero =req.body.numero;
-    const mensagem =req.body.mensagem;
-    vetor[numero],mensagem = mensagem;
-    console.log(vetor);
-    res.status(201).json({mensagem: 'é PUT'});
-   
+app.delete('/cartoes', (req, res) =>{
+ const numero = req.body.numero
+ vetor.splice(numero, 1)
+ console.log(vetor)
+ res.status(201).json({ mensagem: 'funfo o delete' })
+})
+
+app.put('/cartoes', (req, res) => {
+    const numero = req.body.numero
+    const mensagem = req.body.mensagem
+    vetor[numero].mensagem = mensagem
+    console.log(vetor)
+    res.status(201).json({ mensagem: 'funfo o put' })
+})
+
+app.get('/cartoes', (req, res) => {
+    res.status(200).json({ mensagem: 'Olá Mundo!' });
+    console.log('Oi');
 });
 
 app.listen(porta, () => {
