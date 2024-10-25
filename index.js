@@ -1,13 +1,18 @@
 const express = require('express');
 const cors = require('cors');
+const admin = require("firebase-admin");
+
+const serviceAccount = require("./chave firebase portifolio.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
+
 
 const app = express();
 const porta = 3000;
 
 app.use(cors());
 app.use(express.json());
-
-
 
 //const vetor = [
   //  {mensagem: 'oi', numero: 0 },
@@ -39,11 +44,23 @@ let cartoes = [
     },
 ];
 
-app.get('/cartoes', (req, res) => {
+app.get('/cartoes', async (req, res) => {
+    try{
+        const response = await bd.collection('cartoes').get();
+        const cartoes = response.docs.map(doc => ({
+            id: doc.id, ...doc.data(),
+        }))
+            
+    }catch (e) {
+        console.log(e);
+        res.status(500).json({mensagem: 'Erro' + e });
+        console.log('Erro ao buscar dados' + e);
+    }
+   
     res.status(200).json({ cartoes });
-    console.log('oi');
+    console.log('Cartoes carregados com sucesso!');
 
-})
+});
 
 app.post('/cartoes', (req, res) => {
     const{nome , descricao , imagem} = req.body;
