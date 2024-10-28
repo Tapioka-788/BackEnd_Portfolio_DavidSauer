@@ -2,7 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const admin = require("firebase-admin");
 
-const serviceAccount = require("./chave firebase portifolio.json");
+const serviceAccount = {
+    type: process.env.TYPE, 
+    project_id: process.env.PROJECT_ID,
+    private_key_id: process.env.PRIVATE_KEY_ID,
+    private_key: process.env.PRIVATE_KEY,
+    client_email: process.env.CLIENT_EMAIL,
+    client_id: process.env.CLIENT_ID,
+    auth_uri: process.env.AUTH_URI,
+    token_uri: process.env.TOKEN_URI,
+    auth_provider_x509_cert_url: process.env.CLIENT_X509_CERT_URL,
+    client_x509_cert_url: process.env.UNIVERSE_DOMAIN
+};
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
@@ -21,28 +33,28 @@ app.use(express.json());
     //{mensagem: 'hello', numero: 3 },
 //]
 
-let cartoes = [
-    {
-        nome: 'cartao 1',
-        descricao: '10pila',
-        imagem: 'https://www.sigmaaldrich.com/content/dam/sigma-aldrich/product0/071/a5752-25mg_0057134_btl.tif/_jcr_content/renditions/a5752-25mg_0057134_btl-large'
-    },
-    {
-        nome: 'cartao 2',
-        descricao: '48,89cents',
-        imagem: 'https://images-americanas.b2w.io/produtos/01/00/img/3769059/8/3769059896_1GG.jpg'
-    },
-    {
-        nome: 'cartao 3',
-        descricao: 'fiftcent',
-        imagem: 'https://cdn.awsli.com.br/600x450/1810/1810043/produto/88385637/c76fbaa43e.jpg'
-    },
-    {
-        nome: 'cartao 4',
-        descricao: '2dól',
-        imagem: 'https://cdn.sistemawbuy.com.br/arquivos/3d031251600db30f801738111450cdd4/produtos/65553c13c7c0c/20240205_170005-1-65c37c57574dc.jpg'
-    },
-];
+// let cartoes = [
+//     {
+//         nome: 'cartao 1',
+//         descricao: '10pila',
+//         imagem: 'https://www.sigmaaldrich.com/content/dam/sigma-aldrich/product0/071/a5752-25mg_0057134_btl.tif/_jcr_content/renditions/a5752-25mg_0057134_btl-large'
+//     },
+//     {
+//         nome: 'cartao 2',
+//         descricao: '48,89cents',
+//         imagem: 'https://images-americanas.b2w.io/produtos/01/00/img/3769059/8/3769059896_1GG.jpg'
+//     },
+//     {
+//         nome: 'cartao 3',
+//         descricao: 'fiftcent',
+//         imagem: 'https://cdn.awsli.com.br/600x450/1810/1810043/produto/88385637/c76fbaa43e.jpg'
+//     },
+//     {
+//         nome: 'cartao 4',
+//         descricao: '2dól',
+//         imagem: 'https://cdn.sistemawbuy.com.br/arquivos/3d031251600db30f801738111450cdd4/produtos/65553c13c7c0c/20240205_170005-1-65c37c57574dc.jpg'
+//     },
+// ];
 
 app.get('/cartoes', async (req, res) => {
     try{
