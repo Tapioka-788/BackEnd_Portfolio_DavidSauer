@@ -19,6 +19,8 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
 
+const bd = admin.firestore(); 
+
 
 const app = express();
 const porta = 3000;
@@ -62,6 +64,8 @@ app.get('/cartoes', async (req, res) => {
         const cartoes = response.docs.map(doc => ({
             id: doc.id, ...doc.data(),
         }))
+        res.status(200).json({ cartoes });
+        console.log('Cartoes carregados com sucesso!');
             
     }catch (e) {
         console.log(e);
@@ -69,8 +73,6 @@ app.get('/cartoes', async (req, res) => {
         console.log('Erro ao buscar dados' + e);
     }
    
-    res.status(200).json({ cartoes });
-    console.log('Cartoes carregados com sucesso!');
 
 });
 
