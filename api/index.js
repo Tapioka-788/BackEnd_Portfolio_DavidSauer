@@ -28,36 +28,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//const vetor = [
-//  {mensagem: 'oi', numero: 0 },
-//{mensagem: 'ola', numero: 1 },
-//{mensagem: 'hi', numero: 2 },
-//{mensagem: 'hello', numero: 3 },
-//]
-
-// let cartoes = [
-//     {
-//         nome: 'cartao 1',
-//         descricao: '10pila',
-//         imagem: 'https://www.sigmaaldrich.com/content/dam/sigma-aldrich/product0/071/a5752-25mg_0057134_btl.tif/_jcr_content/renditions/a5752-25mg_0057134_btl-large'
-//     },
-//     {
-//         nome: 'cartao 2',
-//         descricao: '48,89cents',
-//         imagem: 'https://images-americanas.b2w.io/produtos/01/00/img/3769059/8/3769059896_1GG.jpg'
-//     },
-//     {
-//         nome: 'cartao 3',
-//         descricao: 'fiftcent',
-//         imagem: 'https://cdn.awsli.com.br/600x450/1810/1810043/produto/88385637/c76fbaa43e.jpg'
-//     },
-//     {
-//         nome: 'cartao 4',
-//         descricao: '2dól',
-//         imagem: 'https://cdn.sistemawbuy.com.br/arquivos/3d031251600db30f801738111450cdd4/produtos/65553c13c7c0c/20240205_170005-1-65c37c57574dc.jpg'
-//     },
-// ];
-
 app.get('/cartoes', async (req, res) => {
     try {
         const response = await bd.collection('cartoes').get();
@@ -75,22 +45,19 @@ app.get('/cartoes', async (req, res) => {
 });
 
 app.post('/cartoes', async (req, res) => {
-    const { nome, descricao, imagem } = req.body;
+    const { nome, descricao } = req.body;
     if (!nome) {
         res.status(400).json({ mensagem: 'Nome do cartão inválido!' })
         console.log('Novo cartão não cadastrado, nome inválido!');
     } else if (!descricao) {
         res.status(400).json({ mensagem: 'Descrição do cartão inválida!' });
         console.log('Novo cartão não cadastrado, nome inválido!');
-    } else if (!imagem) {
-        res.status(400).json({ mensagem: 'Imagem do cartão inválida!' });
-        console.log('Novo cartão não cadastrado, imagem inválida!');
-    } else {
+    } 
+     else {
         try {
             const novoCartaoRef = await bd.collection('cartoes').add({
                 nome,
                 descricao,
-                imagem,
                 criadoEm: admin.firestore.FieldValue.serverTimestamp()
             });
             res.status(201).json({ mensagem: 'Cartão cadastrado com sucesso!', id: novoCartaoRef.id });
