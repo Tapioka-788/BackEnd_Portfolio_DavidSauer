@@ -3,7 +3,7 @@ const cors = require('cors');
 const admin = require("firebase-admin");
 
 const serviceAccount = {
-    type: service_account,
+    type: "service_account",
     project_id: "bdportifoliosauer",
     private_key_id: "94dc570559d07bdf8091a9dce9af8847142280b0",
     private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9mVP0CPuoXf4t\nPDPzN4HO/gNhUHR3a6E9Ntxby5tOErToDSpntL4lP1iFoN5zQqt6D6GEvYID1gMb\nQCtEbmUhG0tOx2rTLVJuR1FRgg3cXANkbd1e5CI6V0zE7nhXew/8LjlA3G3+bTfi\n529SwtM6MWh2cpLqSRN1Zq7M5SY7oIfHZFQNRwUAKTYKso5XCYqPAQrpCRYDl6K1\negVkhFoOuJUJjcnzMCU8PntrCV/RtPRnphy5s4cZJeGdZEsYSRj3LMGNWw2Zq+VK\n5eMBloMVHlSy0sprMXu80aepGvZ08KuainNZfL+amQi0NfQyHJuGnoIEHafel897\nRg1xGE7NAgMBAAECggEAVbYKAOlKsyuCq3pq1cnDEgs9BfI0JIRwiNbTOWBLHjlQ\ntRK2l9lamEYRw58c0ShTksOcNgDh1NAb6WbR6IarixLmsX9vKHZ1rErrVRihIXwr\nQGx2Rd6GJq+ukdxoZMvKRyuyUEMWKo2/VQFhDx3qFYWefuV+yxEsDcfUv+Xbqdo6\nLHBwUDcAu5bmufeCXT6hh0yJ1x/0Fem2wrc+hk46/CaDHxojWbmbsEacIX0iP5+P\nIwaQ8QuXEVOaIqkzpSihRNRbnpy6b0AMlddYJCRBVeHWsR7k2EQfMibhu+Kk3oj1\na2UTeFBGVaMsISms4T2Se8PaxpFaDIGOugQLBFgc1QKBgQDgmoCrS+GfSn18QQ9w\nmYm7VG248M7wlTyKH10nQv8TwwivZZoZvH54XFoVkAMUS4eSBrb5hRr318sCGdpL\nQw83qdin8eVCvJpiUMG6fTM1pVwBu3dFZQ6eF973CRlZBBEyLRuX0JyeRnZJjE2Z\nPpB49hPm5+/vyridmhIcnOnOhwKBgQDYGi0/AQzE+A+cOo18R+7am/t1H4kn02Kr\nDWPOatKFQfQLXo5AHj/qgGRP8RUJ1tCIXfbaoFmwOqt8ynE5P2j8YNV925JVHbJ5\nJ0xqbvAmyQRGK2v0ZLfjnNwNV6vSrNUsx+ORzut2FjG/xDiGIUdxfIj+eal1SSVE\n+r86yCTZCwKBgA3uZ2a4mTEJLMllO7DvRRTCgt/CyAMyLoQet+d0h1/RbBt9ANbx\n0yJiEBBgU2CR4sHS+sx1ThvrXaMuuVSLv0jjlxWrsl22VxkcCzgnBeMg85kD6Lz8\nLLDvqBvIi7LyxqJHG/wJq31Bv5qGQlXsBIgMM2XSIxbLizHzWYY+0V3HAoGBANdV\nfjCBw0+iPyvVzJZCt2dudqrGuczNfkwkE4fkOdI/XgbWObj6a4YoWcyu1d/wBetc\ndlZz4esRC0BWGWyKGvshIps+6BmYdfbzidmkofiD5ZZmPjRRCEvuSfehnL1ZKzJs\nG/92yHnqs7f6trgxARe8mGW6pXkRYenSUisotE7xAoGAPL3w5fMFOP9a5B8Q1pBN\n5Re50I6TvYV7okegURpB6bX3pasl6EBQJ3e3Q8L4rMDVbZ9WYy7f50d1MvfbqbUM\nhEztCiQKYyv6U40IDPek7DqFwvoNFG3hvTGO42+QuZALwTOopAfboXOQi26RdOs9\nPlD6IGYzQqCZoMg3IVDfCJ0=\n-----END PRIVATE KEY-----\n",
@@ -153,6 +153,6 @@ app.put('/cartoes', async (req, res) => {
 
 module.exports = app;
 
-app.listen(3000, () => {
-    console.log('rodando');
-});
+// app.listen(3000, () => {
+//     console.log('rodando');
+// });
