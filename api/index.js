@@ -91,7 +91,7 @@ app.delete('/cartoes', async (req, res) => {
 })
 
 app.put('/cartoes', async (req, res) => {
-    const { nome, descricao, imagem, id } = req.body;
+    const { nome, descricao, id } = req.body;
     if (!id) {
         res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
         console.log('Cartão não atualizado, ID INVÁLIDO.');
@@ -106,7 +106,6 @@ app.put('/cartoes', async (req, res) => {
                 const dadosAtualizados = {};
                 if (nome) dadosAtualizados.nome = nome;
                 if (descricao) dadosAtualizados.descricao = descricao;
-                if (imagem) dadosAtualizados.imagem = imagem;
                 await cartaoRef.update(dadosAtualizados);
                 res.status(200).json({ mensagem: 'Cartão com ID' + id + 'atualizado' });
                 console.log('Cartão com ID' + id + 'atualizado');
