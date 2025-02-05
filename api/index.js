@@ -75,32 +75,29 @@ app.post('/cartoes', async (req, res) => {
 });
 
 app.delete('/cartoes', async (req, res) => {
-    const cartao = req.body.cartao;
-
-    if (!cartao) {
-        res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
-        console.log('Erro: ID do cartão não foi fornecido');
-        return;
-    }
-
-    try {
-        const cartaoRef = bd.collection('cartoes').doc(cartao);
-        const doc = await cartaoRef.get();
-
-        if (!doc.exists) {
-            res.status(404).json({ mensagem: 'Cartão com ID ' + cartao + ' não encontrado' });
-            console.log('Erro: Cartão com ID ' + cartao + ' não encontrado');
-            return;
+    const { id } = req.body;
+    if (!id) {
+        res.status(400).json({ mensagem: 'Id não fornecido' });
+        console.log('Id não fornecido');
+    } else {
+        try {
+            const cartaoRef = bd.collection('cartoes').doc(id);
+            const doc = await cartaoRef.get();
+            if (!doc.exists) {
+                res.status(404).json({ mensagem: `Cartão com Id ${id} não encontrado` });
+                console.log('Cartão não encontrado');
+            } else {
+                await cartaoRef.delete();
+                res.status(200).json({ mensagem: `Cartão com Id ${id} excluido` });
+                console.log(`Cartão com Id ${id} excluido`);
+            }
+        } catch (error) {
+            console.error('Erro ao excluir cartão!', error);
+            res.status(500).json({ mensagem: 'Erro ao excluir cartão' });
         }
-
-        await cartaoRef.delete();
-        res.status(200).json({ mensagem: 'Cartão com ID ' + cartao + ' deletado com sucesso' });
-        console.log('Cartão com ID ' + cartao + ' deletado com sucesso');
-    } catch (e) {
-        console.error('Erro ao deletar o cartão:', e);
-        res.status(500).json({ mensagem: 'Erro ao deletar o cartão' });
     }
 });
+
 
 app.put('/cartoes', async (req, res) => {
     const { nome, descricao, id } = req.body;
@@ -133,4 +130,33 @@ module.exports = app;
 
 // app.listen(3000, () => {
 //     console.log('rodando');
+// });
+
+
+// app.delete('/cartoes', async (req, res) => {
+//     const cartao = req.body.cartao;
+
+//     if (!cartao) {
+//         res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
+//         console.log('Erro: ID do cartão não foi fornecido');
+//         return;
+//     }
+
+//     try {
+//         const cartaoRef = bd.collection('cartoes').doc(cartao);
+//         const doc = await cartaoRef.get();
+
+//         if (!doc.exists) {
+//             res.status(404).json({ mensagem: 'Cartão com ID ' + cartao + ' não encontrado' });
+//             console.log('Erro: Cartão com ID ' + cartao + ' não encontrado');
+//             return;
+//         }
+
+//         await cartaoRef.delete();
+//         res.status(200).json({ mensagem: 'Cartão com ID ' + cartao + ' deletado com sucesso' });
+//         console.log('Cartão com ID ' + cartao + ' deletado com sucesso');
+//     } catch (e) {
+//         console.error('Erro ao deletar o cartão:', e);
+//         res.status(500).json({ mensagem: 'Erro ao deletar o cartão' });
+//     }
 // });
