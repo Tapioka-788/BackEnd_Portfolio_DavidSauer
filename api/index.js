@@ -98,33 +98,32 @@ app.delete('/cartoes', async (req, res) => {
     }
 });
 
-
 app.put('/cartoes', async (req, res) => {
-    const { nome, descricao, id } = req.body;
+    const { nome, descricao, id } = req.body
     if (!id) {
-        res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
-        console.log('Cartão não atualizado, ID INVÁLIDO.');
+        res.status(400).json({ mensagem: 'Id não fornecido' })
+        console.log('Cartão não atulizado, Id inválido')
     } else {
         try {
-            const cartaoRef = bd.collection('cartoes').doc(id);
-            const doc = await cartaoRef.get();
+            const cartaoRef = bd.collection('cartoes').doc(id)
+            const doc = await cartaoRef.get()
             if (!doc.exists) {
-                res.status(404).json({ mensagem: 'Cartão com ID' + id + 'não encontrado' })
-                console.log('Cartão não encontrado');
+                res.status(404).json({ mensagem: 'Cartão com id ' + id + ' não encontrado' })
+                console.log('Cartão não encontrado')
             } else {
-                const dadosAtualizados = {};
-                if (nome) dadosAtualizados.nome = nome;
-                if (descricao) dadosAtualizados.descricao = descricao;
-                await cartaoRef.update(dadosAtualizados);
-                res.status(200).json({ mensagem: 'Cartão com ID' + id + 'atualizado' });
-                console.log('Cartão com ID' + id + 'atualizado');
+                const dadosAtualizados = {}
+                if (nome) dadosAtualizados.nome = nome
+                if (descricao) dadosAtualizados.descricao = descricao
+                await cartaoRef.update(dadosAtualizados)
+                res.status(200).json({ mensagem: 'Cartão com id ' + id + ' atulizado' })
+                console.log('Cartão com id ' + id + ' atulizado')
             }
-        } catch (error) {
-            console.error('Erro ao atualizar cartão:', error);
-            res.status(500).json({ mensagem: 'Erro ao atualizar cartão' })
+        } catch (e) {
+            console.error('Erro ao atulizar cartão!', error)
+            res.status(500).json({ mensagem: 'Erro ao atulizar cartão' })
         }
     }
-});
+})
 
 module.exports = app;
 
