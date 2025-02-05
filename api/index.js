@@ -132,30 +132,3 @@ module.exports = app;
 // });
 
 
-// app.delete('/cartoes', async (req, res) => {
-//     const cartao = req.body.cartao;
-
-//     if (!cartao) {
-//         res.status(400).json({ mensagem: 'ID do cartão não fornecido' });
-//         console.log('Erro: ID do cartão não foi fornecido');
-//         return;
-//     }
-
-//     try {
-//         const cartaoRef = bd.collection('cartoes').doc(cartao);
-//         const doc = await cartaoRef.get();
-
-//         if (!doc.exists) {
-//             res.status(404).json({ mensagem: 'Cartão com ID ' + cartao + ' não encontrado' });
-//             console.log('Erro: Cartão com ID ' + cartao + ' não encontrado');
-//             return;
-//         }
-
-//         await cartaoRef.delete();
-//         res.status(200).json({ mensagem: 'Cartão com ID ' + cartao + ' deletado com sucesso' });
-//         console.log('Cartão com ID ' + cartao + ' deletado com sucesso');
-//     } catch (e) {
-//         console.error('Erro ao deletar o cartão:', e);
-//         res.status(500).json({ mensagem: 'Erro ao deletar o cartão' });
-//     }
-// });
